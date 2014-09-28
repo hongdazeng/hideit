@@ -17,7 +17,7 @@ public class Merger {
         return result;
     }
     
-    public String randomString(int length){
+    public static String randomString(int length){
         final String Pickline = "0123456789abcdefghijklmnopqrestuvwxyz";
         // The method will choose random characters from the above line
         Random randGen = new Random();
@@ -27,5 +27,17 @@ public class Merger {
             builder.append ( Pickline.charAt(randGen.nextInt(Pickline.length())));
         }
         return builder.toString();
+    }
+    
+    public static void main (String[] args){
+        Scanner reader = new Scanner (System.in);
+        System.out.println ("Welcome to Hideit 1.0");
+        System.out.println ("This very simple application will receieve a string from the user"
+                           + "and merge it with a randomly generated string");
+        System.out.println ("Please enter your string: ");
+        String userString = reader.nextLine();
+        int userLen = userString.length();
+        String ranString = randomString(userLen);
+        System.out.println ("-Your new string is: " + merge(userString,ranString));
     }
 }
