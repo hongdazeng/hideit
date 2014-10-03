@@ -36,7 +36,8 @@ public class Merger {
                            + "and merge it with a randomly generated string");
         System.out.println ("Please enter your string: ");
         String userString = reader.nextLine();
-        userString = userString.toLowerCase();
+        userString = userString.toLowerCase(); //force lower case
+        userString = userString.replaceAll("\\s",""); // remove white spaces and non word characters
         int userLen = userString.length();
         String ranString = randomString(userLen);
         System.out.println ("-Your new string is: " + merge(userString, ranString));
