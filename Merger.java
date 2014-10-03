@@ -11,6 +11,7 @@ import java.util.*;
 public class Merger {
     public static String merge (String a, String b) {
         String result = "";
+        // Build a string with every other character from alternating strings.
         for ( int i = 0; i < a.length(); i++ ) {
             result += "" + a.charAt(i) + b.charAt(i);
         }
@@ -19,6 +20,7 @@ public class Merger {
     
     public static String demerge (String a) {
         String result = "";
+        // Build a string with every other character starting from 0.
         for ( int i = 0; i < a.length(); i = i + 2 ) {
             result += a.charAt(i);
         }
@@ -38,19 +40,47 @@ public class Merger {
     }
     
     public static void main (String[] args) {
+        int option = 1;
+        boolean keepgoing = true;
+        
         Scanner reader = new Scanner (System.in);
         System.out.println ("Welcome to Hideit 1.5");
-        System.out.println ("This very simple application will receieve a string from the user"
-                           + "and merge it with a randomly generated string");
-        System.out.println ("Please enter your string: ");
-        String userString = reader.nextLine();
-        userString = userString.toLowerCase(); //force lower case
-        userString = userString.replaceAll("\\s",""); // remove white spaces and non word characters
-        int userLen = userString.length();
-        String ranString = randomString(userLen);
-        String newString = merge(userString, ranString);
-        System.out.println ("-Your new string is: " + newString);
-        System.out.println ("Demerging");
-        System.out.println (demerge(newString));
+        System.out.println ("This very simple application will receieve a string from"
+                                + "the user and merge it with a randomly generated string");
+        while (keepgoing) {
+            System.out.println ("Enter 1 to obfuscate\nEnter 2 to unobfuscate\nEnter 3 to quit ");
+            // catching non-int input
+            try {
+                option = reader.nextInt();
+            }
+            catch (Exception e) {
+                option = 4;
+            }
+            reader.nextLine();
+                       
+            if (option == 1) {
+                System.out.println ("Please enter your string: ");
+                String userString = reader.nextLine();
+                userString = userString.toLowerCase(); //force lower case
+                userString = userString.replaceAll("\\s", ""); // remove white spaces and non word characters
+                int userLen = userString.length();
+                String ranString = randomString(userLen);
+                String newString = merge(userString, ranString);
+                System.out.println ("-Your new string is: " + newString);
+            }
+            if (option == 2) {
+                System.out.println ("Please enter a string to be unobfuscated: ");
+                String userString = reader.nextLine();
+                userString = userString.toLowerCase(); //force lower case
+                userString = userString.replaceAll("\\s", ""); // remove white spaces and non word characters
+                System.out.println (demerge(userString));
+            }
+            if (option == 3) {
+                keepgoing = false;
+            }            
+            else {
+                System.out.println ("Please enter an int between 1 and 3");
+            }
+        }
     }
 }

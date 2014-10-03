@@ -17,6 +17,14 @@ public class Merger {
         return result;
     }
     
+    public static String demerge (String a) {
+        String result = "";
+        for ( int i = 0; i < a.length(); i = i + 2 ) {
+            result += a.charAt(i);
+        }
+        return result;
+    }
+    
     public static String randomString(int length) {
         final String pickline = "0123456789abcdefghijklmnopqrestuvwxyz";
         // The method will choose random characters from the above line
@@ -31,13 +39,18 @@ public class Merger {
     
     public static void main (String[] args) {
         Scanner reader = new Scanner (System.in);
-        System.out.println ("Welcome to Hideit 1.0");
+        System.out.println ("Welcome to Hideit 1.5");
         System.out.println ("This very simple application will receieve a string from the user"
                            + "and merge it with a randomly generated string");
         System.out.println ("Please enter your string: ");
         String userString = reader.nextLine();
+        userString = userString.toLowerCase(); //force lower case
+        userString = userString.replaceAll("\\s",""); // remove white spaces and non word characters
         int userLen = userString.length();
         String ranString = randomString(userLen);
-        System.out.println ("-Your new string is: " + merge(userString, ranString));
+        String newString = merge(userString, ranString);
+        System.out.println ("-Your new string is: " + newString);
+        System.out.println ("Demerging");
+        System.out.println (demerge(newString));
     }
 }
